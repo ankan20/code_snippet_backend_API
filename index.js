@@ -4,11 +4,10 @@ const mysql = require('mysql2');
 const cors = require('cors');
 require('dotenv').config();
 
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// MySQL connection
+// MySQL connection pool
 const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
@@ -17,11 +16,6 @@ const db = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
-});
-
-db.connect((err) => {
-  if (err) throw err;
-  console.log('Connected to MySQL database');
 });
 
 // Middleware
